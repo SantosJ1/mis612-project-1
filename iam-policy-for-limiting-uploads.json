@@ -1,0 +1,31 @@
+{
+ "Version":"2012-10-17",
+ "Statement": [
+   {
+     "Sid": "AllowStatement1",
+     "Action": ["s3:ListAllMyBuckets", "s3:GetBucketLocation"],
+     "Effect": "Allow",
+     "Resource": ["arn:aws:s3:::*"]
+   },
+  {
+     "Sid": "AllowStatement2B",
+     "Action": ["s3:ListBucket"],
+     "Effect": "Allow",
+     "Resource": ["arn:aws:s3:::raw-market-data-ingestion"],
+     "Condition":{"StringEquals":{"s3:prefix":["","manual-upload"],"s3:delimiter":["/"]}}
+    },
+  {
+     "Sid": "AllowStatement3",
+     "Action": ["s3:ListBucket"],
+     "Effect": "Allow",
+     "Resource": ["arn:aws:s3:::DOC-EXAMPLE-BUCKET"],
+     "Condition":{"StringLike":{"s3:prefix":["manual-upload/*"]}}
+    },
+   {
+     "Sid": "AllowStatement4B",
+     "Effect": "Allow",
+     "Action": ["s3:GetObject", "s3:PutObject"],
+     "Resource": ["arn:aws:s3:::raw-market-data-ingestion/manual-upload/*"]
+   }
+ ]
+}
